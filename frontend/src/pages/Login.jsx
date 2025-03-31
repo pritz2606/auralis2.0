@@ -1,42 +1,51 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState } from 'react';
+import API from '../api';
+import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/login", form);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.user._id);
-      navigate(data.user.subscription ? "/home" : "/plans");
+      const res = await API.post('/auth/login', { email, password });
+      localStorage.setItem('token', res.data.token);
+      alert('Login successful!');
+      navigate('/home');
     } catch (err) {
-      alert("Invalid credentials");
+      setError(err.response?.data?.error || 'Login failed');
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <h2>Login to AURALIS</h2>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Email"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
           type="password"
           placeholder="Password"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
         <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? <Link to="/register">Register here</Link></p>
+      <p>
+        Don't have an account? <a href="/register">Register here</a>
+      </p>
     </div>
   );
-}
+};
+
+export default Login;
