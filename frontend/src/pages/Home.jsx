@@ -1,7 +1,7 @@
-// Home.jsx
 import React, { useEffect, useState } from 'react';
 import API from '../api';
 import Header from '../components/Header';
+import MovieCard from '../components/MovieCard'; // Ensure MovieCard is imported
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -46,17 +46,23 @@ const Home = () => {
         <div className="movie-list">
           {movies.length > 0 ? (
             movies.map((movie) => (
-              <div
-                key={movie._id}
-                className="movie-card"
-                onClick={() => navigate(`/movie/${movie._id}`)} // Navigate to movie details on click
-              >
-                <img src={movie.image} alt={movie.title} />
-                <h3>{movie.title}</h3>
-              </div>
+              <MovieCard key={movie._id} movie={movie} />
             ))
           ) : (
-            <p>No movies available at the moment</p> // Message if no movies
+            // Placeholder movie data
+            <>
+              {[...Array(12)].map((_, index) => (
+                <MovieCard 
+                  key={index} 
+                  movie={{ 
+                    _id: index, 
+                    title: `Placeholder Movie ${index + 1}`, 
+                    imageUrl: 'https://via.placeholder.com/200', 
+                    genre: 'Genre' 
+                  }} 
+                />
+              ))}
+            </>
           )}
         </div>
       </div>
