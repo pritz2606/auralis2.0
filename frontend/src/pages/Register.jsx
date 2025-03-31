@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import './Auth.css';
 import API from '../api';
 
 
@@ -19,11 +20,14 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="register-container">
+      <h1>Register to AURALIS</h1>
+      <form onSubmit={handleSubmit}>
       <input placeholder="Name" onChange={(e) => setForm({ ...form, name: e.target.value })} required />
       <input type="email" placeholder="Email" onChange={(e) => setForm({ ...form, email: e.target.value })} required />
       <input type="password" placeholder="Password" onChange={(e) => setForm({ ...form, password: e.target.value })} required />
       <button type="submit">Register</button>
-    </form>
+      </form>
+    </div>
   );
 }
