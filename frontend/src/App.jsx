@@ -4,7 +4,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import MovieDetails from './pages/MovieDetails';
+import Plans from './pages/Plans';
+import Success from './pages/Success';
 
+// Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   return token ? children : <Navigate to="/" />;
@@ -14,8 +17,13 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/plans" element={<Plans />} />
+        <Route path="/success" element={<Success />} />
+
+        {/* Protected Routes */}
         <Route 
           path="/home" 
           element={
@@ -32,6 +40,9 @@ const App = () => {
             </ProtectedRoute>
           } 
         />
+
+        {/* Redirect to Home if no routes match */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
