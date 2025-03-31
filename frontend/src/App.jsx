@@ -36,7 +36,7 @@ const App = () => {
           path="/movie/:id" 
           element={
             <ProtectedRoute>
-              <MovieDetails />
+              {/* <MovieDetails /> */}
             </ProtectedRoute>
           } 
         />

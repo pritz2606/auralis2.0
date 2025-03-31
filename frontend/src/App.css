@@ -50,10 +50,11 @@
 }
 
 .movie-card {
-  width: 220px; /* Set a fixed width for the movie cards */
-  transition: transform 0.3s, box-shadow 0.3s; /* Add transition effects */
-  margin: 15px; /* Add margin for spacing */
-  border: 1px solid #ddd; /* Light border */
+  width: 420px; /* Set a fixed width for the movie cards */
+  height: 420px; /* Set a fixed height for the movie cards */
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Add background color transition */
+  margin: 25px; /* Add margin for spacing */
+  border: 2px solid #ddd; /* Light border */
   border-radius: 10px; /* Rounded corners */
   padding: 15px; /* Padding inside the card */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
@@ -80,4 +81,13 @@
 .movie-card:hover {
   transform: scale(1.05); /* Scale up the card on hover */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  background-color: #f9f9f9; /* Light background on hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .movie-card {
+    width: 90%; /* Make cards responsive */
+    height: auto; /* Allow height to adjust based on content */
+  }
 }
