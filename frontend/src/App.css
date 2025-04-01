@@ -1,0 +1,93 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Movie list styles */
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px;
+}
+
+.movie-card {
+  width: 420px; /* Set a fixed width for the movie cards */
+  height: 420px; /* Set a fixed height for the movie cards */
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Add background color transition */
+  margin: 25px; /* Add margin for spacing */
+  border: 2px solid #ddd; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 15px; /* Padding inside the card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  background-color: #fff; /* White background */
+  text-align: center; /* Center text */
+}
+
+.movie-card img {
+  width: 100%; /* Responsive image */
+  border-radius: 8px; /* Rounded image corners */
+}
+
+.movie-card h2 {
+  font-size: 1.2em; /* Title font size */
+  color: #333; /* Dark text color */
+  margin: 10px 0; /* Margin around title */
+}
+
+.movie-card p {
+  font-size: 0.9em; /* Genre font size */
+  color: #777; /* Lighter text color */
+}
+
+.movie-card:hover {
+  transform: scale(1.05); /* Scale up the card on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  background-color: #f9f9f9; /* Light background on hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .movie-card {
+    width: 90%; /* Make cards responsive */
+    height: auto; /* Allow height to adjust based on content */
+  }
+}
