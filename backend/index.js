@@ -9,7 +9,7 @@ import stripeRoutes from "./routes/stripeRoutes.js";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({origin:"https://aesthetic-begonia-ee0c7e.netlify.app",credentials:true})); // Allow CORS for the frontend URL
 app.use(express.json());
 
 // Routes
