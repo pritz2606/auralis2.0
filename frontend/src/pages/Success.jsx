@@ -11,8 +11,15 @@ export default function Success() {
   useEffect(() => {
     const confirmPayment = async () => {
       try {
+        
+        const successUrl = `https://67ebdf3dc79d2b0008ec302c--aesthetic-begonia-ee0c7e.netlify.app/success?userId=${userId}&plan=${plan}`;
+
+       
         await axios.post('http://localhost:5000/api/stripe/payment-success', { userId, plan });
-        setTimeout(() => navigate('/home'), 3000);
+
+        setTimeout(() => {
+          window.location.href = successUrl; 
+        }, 3000); 
       } catch (error) {
         alert('Error confirming payment');
       }
