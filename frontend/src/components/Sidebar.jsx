@@ -1,7 +1,6 @@
 import React from "react";
 import { FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
 
 const Sidebar = ({ user, onClose }) => {
   const navigate = useNavigate();
@@ -11,9 +10,7 @@ const Sidebar = ({ user, onClose }) => {
       <FaTimes size={30} onClick={onClose} />
       <h2>{user?.name}'s Profile</h2>
       <ul>
-      <li>
-          <Link to="/account">Account Settings</Link> {/* Link to Account Page */}
-        </li>
+        <li onClick={() => navigate("/account")}>Account Settings</li>
         <li>Subscription Plan</li>
         <li onClick={() => {
           localStorage.removeItem("token");
