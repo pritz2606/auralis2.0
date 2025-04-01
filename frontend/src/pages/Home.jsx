@@ -43,7 +43,7 @@ const Home = () => {
         <h2>Welcome to AURALIS, {user?.name}!</h2>
 
         {/* Movie listing */}
-        <div className="movie-list">
+        <div className="movie-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
           {movies.length > 0 ? (
             movies.map((movie) => (
               <MovieCard key={movie._id} movie={movie} />
