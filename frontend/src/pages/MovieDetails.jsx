@@ -1,45 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const MovieDetails = () => {
-  const { id } = useParams(); // Get the movie ID from URL
-  const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const movie = location.state; // Assuming movie details are passed via state
 
-  useEffect(() => {
-    // Fetch movie details based on the movie ID
-    axios.get(`http://localhost:5000/api/movies/${id}`)
-      .then(res => setMovie(res.data))
-      .catch(err => console.error("Error fetching movie details:", err));
-  }, [id]);
-
-  if (!movie) {
-    return <div>Loading...</div>;
-  }
+  const handleWatchClick = () => {
+    window.open('https://streamable.com/8v6rg0', '_blank');
+  };
 
   return (
-    <div className="movie-details">
+    <div style={{ padding: '20px' }}>
       <h1>{movie.title}</h1>
-      <p>{movie.description}</p>
-
-      <div className="buttons">
-        <button onClick={() => alert("Play the movie")}>Play</button>
-        <button onClick={() => window.open(movie.trailerUrl, "_blank")}>Watch Trailer</button>
-      </div>
-
-      <div className="movie-video">
-        {movie.trailerUrl && (
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/${movie.trailerUrl}`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        )}
-      </div>
+      <img src={movie.imageUrl} alt={movie.title} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+      <p><strong>Genre:</strong> {movie.genre}</p>
+      <p><strong>Release Date:</strong> {new Date(movie.releaseDate).toLocaleDateString()}</p>
+      <p><strong>Rating:</strong> {movie.rating ? movie.rating : 'N/A'}</p>
+      <button onClick={handleWatchClick} style={{ padding: '10px 15px', border: 'none', borderRadius: '5px', backgroundColor: '#646cff', color: '#fff', cursor: 'pointer' }}>
+        Watch
+      </button>
     </div>
   );
 };
