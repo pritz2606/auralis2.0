@@ -54,11 +54,46 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Protected Route Example (To check User Data using Token)
+// Get User Profile (without password)
 router.get('/user', verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id).select("-password"); // Exclude password
     res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Update User Profile (Name & Password)
+router.put('/user/update', verifyToken, async (req, res) => {
+  const { name, oldPassword, newPassword, confirmNewPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // Update Name if provided
+    if (name) user.name = name;
+
+    // If old password is provided, validate and update password
+    if (oldPassword && newPassword && confirmNewPassword) {
+      // Check if old password matches the current password
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ error: "Incorrect old password" });
+      }
+
+      // Check if new password and confirm password match
+      if (newPassword !== confirmNewPassword) {
+        return res.status(400).json({ error: "New passwords do not match" });
+      }
+
+      // Update password if validation passes
+      user.password = await bcrypt.hash(newPassword, 10);
+    }
+
+    await user.save();
+    res.json({ message: "Profile updated successfully" });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }

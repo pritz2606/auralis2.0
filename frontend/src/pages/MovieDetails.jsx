@@ -60,6 +60,7 @@ const MovieDetails = () => {
           }}>
             Watch
           </button>
+          
         </div>
       </div>
     </div>
