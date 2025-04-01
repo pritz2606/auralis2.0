@@ -17,8 +17,8 @@ router.post("/create-checkout-session", async (req, res) => {
     payment_method_types: ["card"],
     mode: "payment",
     line_items: [{ price_data: { currency: "inr", product_data: { name: "Auralis Subscription" }, unit_amount: price }, quantity: 1 }],
-    success_url: `http://localhost:5173/success?userId=${userId}&plan=${plan}`,
-    cancel_url: "http://localhost:5173/",
+    success_url: `https://67ebdf3dc79d2b0008ec302c--aesthetic-begonia-ee0c7e.netlify.app/success?userId=${userId}&plan=${plan}`,
+    cancel_url: "https://67ebdf3dc79d2b0008ec302c--aesthetic-begonia-ee0c7e.netlify.app/cancel",
   });
 
   res.json({ url: session.url });
